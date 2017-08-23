@@ -178,7 +178,10 @@ open class TagView: UIButton {
     // MARK: - layout
 
     override open var intrinsicContentSize: CGSize {
-        var size = titleLabel?.text?.size(withAttributes: [NSAttributedStringKey.font: textFont]) ?? CGSize.zero
+        var size = CGSize.zero
+        if let text = titleLabel?.text as? NSString {
+            size = text.size(attributes: [NSFontAttributeName: textFont])
+        }
         size.height = textFont.pointSize + paddingY * 2
         size.width += paddingX * 2
         if size.width < size.height {
